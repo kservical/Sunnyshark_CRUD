@@ -1,0 +1,84 @@
+
+{% extends "layout.html" %}
+{% block content %}
+	<h2> Les automates enregistrés </h2>
+	<table class="table table-responsive table-sm table-dark">
+		<tr>
+			<th>ID </th>
+			<th>Nom de l'automate</th>
+			<th>Modèle </th>
+			<th>Marque</th>
+			<th>Type de Bassin</th>			
+		    <th>Site physique </th>
+		    <th>Configuration </th>
+		</tr>
+	{% for n in automates %}
+		<tr>
+			<td> {{n._id}} </td>
+			<td> {{n.name}} </td>
+			<td> {{n.model}} </td>
+			<td> {{n.brand}} </td>
+			<td> {{n.pool}} </td>
+			<td> {{n.physical_area}} </td>
+			<td> {{n.configuration}} </td>
+ 		</tr>
+	{% endfor %}
+</table>
+{% endblock %}
+
+{% block form_add %}
+ 	<form method="post" >
+ 		<div class="form-group">
+		    <label for="id">ID</label>
+		    <input type="textarea" class="form-control" name="id" placeholder="">
+		  </div>
+ 		<div class="form-row">
+ 		<div class="form-group">
+		    <label for="name">Nom de l'automate</label>
+		    <input type="textarea" class="form-control" name="name" id="name" placeholder="">
+		  </div>
+ 		<div class="form-row">
+		    <div class="form-group col-md-6">
+		      <label for="model"> Modele</label>
+		      <input type="text" class="form-control" name="model" id="model" placeholder="Modele">
+		    </div>
+		    <div class="form-group col-md-6">
+		      <label for="brand">Marque</label>
+		      <input type="text" class="form-control" name="brand" id="brand" placeholder="Marque">
+		    </div>
+		  </div>
+		 <div class="form-row">
+		    <div class="form-group col-md-6">
+		      <label for="pool"> Type de bassin</label>
+		      <input type="text" class="form-control" name="pool" id="pool" placeholder="Ex: Bassins Nageur pro">
+		    </div>
+		    <div class="form-group col-md-6">
+		      <label for="physical_area">Site physique</label>
+		      <input type="text" class="form-control" name="physical_area" id="physical_area" placeholder="Ex : Saint paul">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="confifuration">Configuration</label>
+		    <input type="textarea" class="form-control" name="configuration" id="configuration">
+		  </div>
+		  <div>
+		  	<input type="submit" name="save" formaction= "/add" value="Save">
+ 			<input type="submit" name="update" formaction="/update" value="Update">
+ 			<input type="submit" name="remove" formaction="/remove" value="Remove">
+		  </div>
+ 		
+ 	</form>
+{% endblock %}
+<!--
+{% block form_remove %}
+<form method="post" action="/remove">
+		 <div class="form-row">
+		    <div class="form-group col-md-6">
+		      <label for="id"> ID  à supprimer</label>
+		      <input type="text" class="form-control" name="id" id="id" placeholder="ID">
+		    </div>
+		</div>
+ 		<input type="submit" name="Remove" value="Supprimer">
+</form>
+{% endblock %}
+-->
