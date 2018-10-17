@@ -9,10 +9,29 @@ router.get("/", (req, res) => {
 	})
 });
 
+//Back to main page
+router.post("/", (req, res) => {
+	automates.find({}).then(automates=>{
+		res.render('automates/index.html', {automates: automates});
+	})
+});
+
+
+//Go on page edit an automate
+router.post("/edit", (req, res) => {
+	automates.findById(req.body.id).then(automates=>{
+		res.render('automates/edit.html', {automates: automates , type :"update"});
+	})
+});
+
+//Go on page to create a  new automate
+router.post("/new", (req, res) => {
+		res.render('automates/add.html',{type :"add"});
+})
+
 //Add a new automates in database then redirect on main page 
 router.post("/add", (req, res) =>{
 	if(req.body.name != ""){
-
 		var myData = new automates()
 		myData.save()
 			.then(automates => {
@@ -35,7 +54,6 @@ router.post("/add", (req, res) =>{
 		res.status(400).send("Unable to save an object into database : because there are any name <a href='/'>Back</a>");
 	}
 })
-
 // Delete an automates by Id.
 router.post("/remove",(req,res)=>{
 	automates.findByIdAndDelete(req.body.id)
@@ -47,6 +65,7 @@ router.post("/remove",(req,res)=>{
 		})
 })
 
+
 router.post("/update",(req,res)=>{
   automates.findById(req.body.id, (err,automates)=>{
 	  if(err){
@@ -55,12 +74,12 @@ router.post("/update",(req,res)=>{
 	  else{
 		  automates.save()
 		  .then(automates =>{
-		  	if(req.body.name !=""){automates.name = req.body.name} 
-			if(req.body.model !=""){automates.model = req.body.model} 
-			if(req.body.brand !=""){automates.brand = req.body.brand} 
-			if(req.body.pool !=""){automates.pool = req.body.pool}
-			if(req.body.physical_area !=""){automates.physical_area = req.body.physical_area} 
-			if(req.body.configuration !=""){automates.configuration = req.body.configuration} 
+		  	automates.name = req.body.name
+			automates.model = req.body.model
+			automates.brand = req.body.brand
+			automates.pool = req.body.pool
+			automates.physical_area = req.body.physical_area
+			automates.configuration = req.body.configuration
 		  	return automates.save()
 		  	})
 		  .then(()=>{
