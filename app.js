@@ -4,7 +4,7 @@ var nunjucks = require('nunjucks');
 var mongoose = require("mongoose");
 const PORT = process.env.PORT || 5000
 
-mongoose.connect("mongodb://sunnyshark:shark974@ds235243.mlab.com:35243/heroku_1xhpvthv")
+mongoose.connect("mongodb://<user_db>:<password_db>@host_db")
 require('./models/automates')
 
 var app = express();
