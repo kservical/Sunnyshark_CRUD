@@ -4,12 +4,10 @@ var nunjucks = require('nunjucks');
 var mongoose = require("mongoose");
 
 
-mongoose.connect("mongodb://localhost:27017/sunnyshark");
+mongoose.connect("mongodb://sunnyshark:shark974@ds235243.mlab.com:35243/heroku_1xhpvthv")
 require('./models/automates')
 
 var app = express();
-
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
